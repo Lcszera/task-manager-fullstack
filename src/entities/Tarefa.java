@@ -23,6 +23,11 @@ public class Tarefa {
 
     }
 
+    public int getId() {
+        return id;
+
+    }
+
     public void concluir() {
 
         this.concluida = true;
