@@ -11,8 +11,9 @@ public class Tarefa {
     private String descricao;
     private LocalDate dataCriacao;
     private LocalDate dataConclusao;
+    private Usuario usuario;
 
-    public Tarefa(int id, String titulo, String descricao, int dificuldade) {
+    public Tarefa(int id, String titulo, String descricao, int dificuldade, Usuario usuario) {
 
         this.id = id;
         this.titulo = titulo;
@@ -25,6 +26,11 @@ public class Tarefa {
 
     public int getId() {
         return id;
+
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
 
     }
 

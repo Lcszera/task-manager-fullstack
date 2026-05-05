@@ -1,6 +1,8 @@
 package services;
 
 import entities.Tarefa;
+import entities.Usuario;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.time.LocalDate;
@@ -10,9 +12,9 @@ public class TarefaService {
     private List<Tarefa> tarefas = new ArrayList<>();
     private int contadorId = 1;
 
-    public Tarefa criar(String titulo, String descricao, int dificuldade) {
+    public Tarefa criar(String titulo, String descricao, int dificuldade, Usuario usuario) {
 
-        Tarefa tarefa = new Tarefa(contadorId++, titulo, descricao, dificuldade);
+        Tarefa tarefa = new Tarefa(contadorId++, titulo, descricao, dificuldade, usuario);
         tarefas.add(tarefa);
         return tarefa;
 
