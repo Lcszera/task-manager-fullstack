@@ -20,6 +20,22 @@ public class TarefaService {
 
     }
 
+    public List<Tarefa> listarPorUsuario(Usuario usuario) {
+
+        return tarefas;
+
+    }
+
+
+    List<Tarefa> resultado = new ArrayList<>();
+
+    for (Tarefa t : tarefas) {
+
+        if (t.getUsuario().equals())
+
+    }
+
+
     public List<Tarefa> listar() {
 
         return tarefas;
