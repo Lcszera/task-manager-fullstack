@@ -6,16 +6,25 @@ import services.TarefaService;
 public class Main {
     public static void main(String[] args) {
 
-        Usuario user = new Usuario(1, "Lucas", "lucas@email.com", "123");
+        TarefaService tarefaService = new TarefaService();
+        UsuarioService usuarioService = new UsuarioService();
 
-        Tarefa tarefa = new Tarefa(1, "Estudar Java", "POO e Git", 3, user);
 
-        UsuarioService service = new UsuarioService();
+        usuarioService.cadastrar("Lucas", "lucasmen2005@gmail.com", "123");
+        Usuario lucas = usuarioService.login("lucasmen2005@gmail.com", "123");
 
-        service.cadastrar("Lucas", "lucasmen2005@gmail.com", "lucas123");
-        service.cadastrar("Rafaella", "rafalouyse@gmail.com", "rafinha123");
 
-        Usuario logado = service.login("lucasmen2005@gmail.com", "lucas123");
+        Tarefa tarefa = tarefaService.criar(
+                "Protótipo Web",
+                "Projeto Freelancer",
+                1,
+                lucas
+        );
+
+
+        usuarioService.cadastrar("Rafaella", "rafalouyse@gmail.com", "rafinha123");
+
+        Usuario logado = usuarioService.login("lucasmen2005@gmail.com", "lucas123");
 
         if (logado != null) {
             System.out.println("Login realizado: " + logado.getNome());
@@ -23,10 +32,6 @@ public class Main {
             System.out.println("Email ou senha inválidos");
         }
 
-        System.out.println("Tarefa: " + tarefa.getTitulo());
 
-        tarefa.concluir();
-
-        System.out.println("Concluída? " + tarefa.isConcluida());
     }
 }
