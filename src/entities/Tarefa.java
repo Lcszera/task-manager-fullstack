@@ -16,6 +16,7 @@ public class Tarefa {
     public Tarefa(int id, String titulo, String descricao, int dificuldade, Usuario usuario) {
 
         this.id = id;
+        this.usuario = usuario;
         this.titulo = titulo;
         this.descricao = descricao;
         this.dificuldade = dificuldade;
