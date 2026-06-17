@@ -18,7 +18,7 @@ public class Main {
         int escolha = -1;
         String nome;
         String email;
-        int senha;
+        String senha;
 
         while (escolha != 0) {
 
@@ -33,11 +33,22 @@ public class Main {
                         System.out.println("\nDigite seu email: ");
                             email = sc.next();
                         System.out.println("\nDigite sua senha: ");
-                            senha = sc.nextInt();
+                            senha = sc.next();
+
+                                usuarioService.cadastrar(nome, email, senha);
+                                System.out.println("\nCadastro efetuado com sucesso!");
 
                         break;
                     case 2:
-                        System.out.println("2. Login selecionado");
+
+                        System.out.println("\nDigite seu email: ");
+                            email = sc.next();
+                        System.out.println("\nDigite sua senha: ");
+                            senha = sc.next();
+
+                                usuarioService.login(email, senha);
+                                System.out.println("\nLogin efetuado com sucesso!");
+
                         break;
                     case 0:
                         System.out.println("0. Saindo...");
