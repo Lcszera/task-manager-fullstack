@@ -19,6 +19,8 @@ public class Main {
         String nome;
         String email;
         String senha;
+        Usuario usuarioLogado;
+
 
         while (escolha != 0) {
 
@@ -46,8 +48,14 @@ public class Main {
                         System.out.println("\nDigite sua senha: ");
                             senha = sc.next();
 
-                                usuarioService.login(email, senha);
-                                System.out.println("\nLogin efetuado com sucesso!");
+                                usuarioLogado = usuarioService.login(email, senha);
+
+                                if (usuarioLogado != null) {
+                                    System.out.println("\nLogin efetuado com sucesso!");
+                                } else {
+                                    System.out.println("\nEmail ou senha inválida!");
+                                }
+
 
                         break;
                     case 0:
