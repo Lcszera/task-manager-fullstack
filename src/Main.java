@@ -26,7 +26,8 @@ public class Main {
 
         while (escolha != 0) {
 
-            System.out.println("\nPor favor, escolha uma opção do menu: \n1. Cadastrar \n2. Login \n3. Criar tarefa \n0. Sair");
+            System.out.println("\nPor favor, escolha uma opção do menu: " +
+                    "\n1. Cadastrar \n2. Login \n3. Criar tarefa \n4. Minhas tarefas \n0. Sair");
                 escolha = sc.nextInt();
 
                 switch (escolha) {
@@ -75,6 +76,23 @@ public class Main {
                                     tarefaService.criar(titulo, descricao, dificuldade, usuarioLogado);
 
                                     System.out.println("\nTarefa criada com sucesso!");
+
+                                }
+
+                        break;
+                    case 4:
+
+                                if (usuarioLogado == null) {
+                                    System.out.println("\nFaça login primeiro!");
+                                } else {
+
+                                    tarefaService.listarPorUsuario(usuarioLogado);
+
+                                    for (Tarefa t: tarefaService.listarPorUsuario(usuarioLogado)) {
+                                        if (t.getUsuario().getId() == usuarioLogado.getId()) {
+                                            System.out.println(t.getTitulo());
+                                        }
+                                    }
 
                                 }
 
