@@ -19,12 +19,14 @@ public class Main {
         String nome;
         String email;
         String senha;
-        Usuario usuarioLogado;
-
+        Usuario usuarioLogado = null;
+        String titulo;
+        String descricao;
+        int dificuldade;
 
         while (escolha != 0) {
 
-            System.out.println("\nPor favor, escolha uma opção do menu: \n1. Cadastrar \n2. Login \n0. Sair");
+            System.out.println("\nPor favor, escolha uma opção do menu: \n1. Cadastrar \n2. Login \n3. Criar tarefa \n0. Sair");
                 escolha = sc.nextInt();
 
                 switch (escolha) {
@@ -58,6 +60,25 @@ public class Main {
 
 
                         break;
+                    case 3:
+
+                                if (usuarioLogado == null) {
+                                    System.out.println("\nFaça login primeiro!");
+                                } else {
+                                    System.out.println("\nTítulo: ");
+                                        titulo = sc.next();
+                                    System.out.println("\nDescrição: ");
+                                        descricao = sc.next();
+                                    System.out.println("\nDificuldade: ");
+                                        dificuldade = sc.nextInt();
+
+                                    tarefaService.criar(titulo, descricao, dificuldade, usuarioLogado);
+
+                                    System.out.println("\nTarefa criada com sucesso!");
+
+                                }
+
+                        break;
                     case 0:
                         System.out.println("0. Saindo...");
                         break;
@@ -68,6 +89,7 @@ public class Main {
 
         // PARTE CADASTRAL ABAIXO
 
+       /*
 
         usuarioService.cadastrar("Lucas", "lucasmen2005@gmail.com", "123");
         Usuario lucas = usuarioService.login("lucasmen2005@gmail.com", "123");
@@ -99,7 +121,6 @@ public class Main {
 
         // UM POUCO DE REDUNDÂNCIA NA PARTE CADASTRAL ABAIXO
 
-        /*
 
         usuarioService.cadastrar("Rafaella", "rafalouyse@gmail.com", "rafinha123");
 
