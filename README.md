@@ -16,15 +16,13 @@ A aplicação também conta com o registro de alguns dados, com persistência lo
 * Foto do usuário (caso seja de sua vontade);
 * Tarefas criadas pelo usuário.
 
-Lembrando que, a aplicação também deve realizar cálculos de checagem, para saber quando a garantia do serviço foi excedida. Quando a garantia for excedida, será impressa uma notificação para o usuário ao iniciar a aplicação, informando que o dispositivo cujo id será informado, teve sua garantia excedida.
-
 # 💻 Tecnologias e Ferramentas utilizadas (até o momento):
 
 * Java 21;
 * IntelliJ IDE 2026.1;
 * Git.
 
-# Tecnologias e Ferramentas que serão utilizadas em breve:
+# 📖 Tecnologias e Ferramentas que serão utilizadas em breve:
 
 * JDBC + PostgreSQL;
 * Spring Boot;
