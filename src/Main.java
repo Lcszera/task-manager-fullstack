@@ -23,11 +23,12 @@ public class Main {
         String titulo;
         String descricao;
         int dificuldade;
+        int id;
 
         while (escolha != 0) {
 
             System.out.println("\nPor favor, escolha uma opção do menu: " +
-                    "\n1. Cadastrar \n2. Login \n3. Criar tarefa \n4. Minhas tarefas \n0. Sair");
+                    "\n1. Cadastrar \n2. Login \n3. Criar tarefa \n4. Minhas tarefas \n5. Concluir tarefa \n0. Sair");
                 escolha = sc.nextInt();
 
                 switch (escolha) {
@@ -89,12 +90,28 @@ public class Main {
                                     tarefaService.listarPorUsuario(usuarioLogado);
 
                                     for (Tarefa t: tarefaService.listarPorUsuario(usuarioLogado)) {
-                                        if (t.getUsuario().getId() == usuarioLogado.getId()) {
-                                            System.out.println(t.getTitulo());
-                                        }
+                                            System.out.println("\nTítulo: " + t.getTitulo() + "\nID: " + t.getId());
                                     }
 
                                 }
+
+                        break;
+                    case 5:
+
+                                if (usuarioLogado == null) {
+                                    System.out.println("Faça login primeiro!");
+                                } else {
+
+                                            System.out.println("\nDigite o ID da tarefa: ");
+                                                id = sc.nextInt();
+
+                                                tarefaService.concluirTarefa(id);
+
+                                            System.out.println("\nA tarefa com o ID: " + id + " foi concluída!");
+
+
+                                }
+
 
                         break;
                     case 0:
