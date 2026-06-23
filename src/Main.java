@@ -90,7 +90,8 @@ public class Main {
                                     tarefaService.listarPorUsuario(usuarioLogado);
 
                                     for (Tarefa t: tarefaService.listarPorUsuario(usuarioLogado)) {
-                                            System.out.println("\nTítulo: " + t.getTitulo() + "\nID: " + t.getId());
+                                            System.out.println("\nTítulo: " + t.getTitulo() + "\nID: " + t.getId() +
+                                                    "\nConcluída: " + t.isConcluida());
                                     }
 
                                 }
@@ -102,16 +103,17 @@ public class Main {
                                     System.out.println("Faça login primeiro!");
                                 } else {
 
-                                            System.out.println("\nDigite o ID da tarefa: ");
-                                                id = sc.nextInt();
+                                    System.out.println("\nDigite o ID da tarefa: ");
+                                        id = sc.nextInt();
 
-                                                tarefaService.concluirTarefa(id);
+                                if (tarefaService.concluirTarefa(id)) {
+                                    System.out.println("\nA tarefa com o ID: " + id + " foi concluída!");
+                                    } else {
 
-                                            System.out.println("\nA tarefa com o ID: " + id + " foi concluída!");
-
-
+                                    System.out.println("\nTarefa não encontrada!");
                                 }
 
+                                }
 
                         break;
                     case 0:

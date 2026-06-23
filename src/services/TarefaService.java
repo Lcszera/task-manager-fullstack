@@ -43,16 +43,17 @@ public class TarefaService {
     }
 
 
-    public void concluirTarefa(int id) {
+    public boolean concluirTarefa(int id) {
 
         Tarefa tarefa = buscarPorId(id);
 
         if (tarefa != null) {
             tarefa.concluir();
-        } else {
-            System.out.println("Tarefa não encontrada!");
+
+            return true;
         }
 
+            return false;
     }
 
     private Tarefa buscarPorId(int id) {
