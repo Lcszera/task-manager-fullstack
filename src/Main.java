@@ -28,7 +28,8 @@ public class Main {
         while (escolha != 0) {
 
             System.out.println("\nPor favor, escolha uma opção do menu: " +
-                    "\n1. Cadastrar \n2. Login \n3. Criar tarefa \n4. Minhas tarefas \n5. Concluir tarefa \n0. Sair");
+                    "\n1. Cadastrar \n2. Login \n3. Criar tarefa \n4. Minhas tarefas " +
+                    "\n5. Concluir tarefa \n6. Excluir tarefa \n0. Sair");
                 escolha = sc.nextInt();
 
                 switch (escolha) {
@@ -89,9 +90,27 @@ public class Main {
 
                                     tarefaService.listarPorUsuario(usuarioLogado);
 
-                                    for (Tarefa t: tarefaService.listarPorUsuario(usuarioLogado)) {
-                                            System.out.println("\nTítulo: " + t.getTitulo() + "\nID: " + t.getId() +
-                                                    "\nConcluída: " + t.isConcluida());
+                                    List<Tarefa> tarefasUsuario = tarefaService.listarPorUsuario(usuarioLogado);
+
+                                    boolean encontrouTarefa = false;
+
+                                    for (Tarefa t : tarefasUsuario) {
+
+                                        if (!t.isExcluida()) {
+
+                                            encontrouTarefa = true;
+
+                                            System.out.println(
+                                                    "\nTítulo: " + t.getTitulo() +
+                                                            "\nID: " + t.getId() +
+                                                            "\nConcluída: " + t.isConcluida()
+                                            );
+                                        }
+
+                                        if (!encontrouTarefa) {
+                                            System.out.println("\nNenhuma tarefa encontrada!");
+                                        }
+
                                     }
 
                                 }
@@ -109,6 +128,25 @@ public class Main {
                                 if (tarefaService.concluirTarefa(id)) {
                                     System.out.println("\nA tarefa com o ID: " + id + " foi concluída!");
                                     } else {
+
+                                    System.out.println("\nTarefa não encontrada!");
+                                }
+
+                                }
+
+                        break;
+                    case 6:
+
+                                if (usuarioLogado == null) {
+                                    System.out.println("Faça login primeiro!");
+                                } else {
+
+                                    System.out.println("\nDigite o ID da tarefa: ");
+                                        id = sc.nextInt();
+
+                                if (tarefaService.excluirTarefa(id)) {
+                                    System.out.println("\nA tarefa com o ID: " + id + " foi excluída!");
+                                } else {
 
                                     System.out.println("\nTarefa não encontrada!");
                                 }

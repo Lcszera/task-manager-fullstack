@@ -56,6 +56,19 @@ public class TarefaService {
             return false;
     }
 
+    public boolean excluirTarefa(int id) {
+
+        Tarefa tarefa = buscarPorId(id);
+
+        if (tarefa != null) {
+            tarefa.excluir();
+
+            return true;
+        }
+
+            return false;
+    }
+
     private Tarefa buscarPorId(int id) {
 
         for (Tarefa t : tarefas) {
