@@ -72,4 +72,14 @@ public class Tarefa {
 
     }
 
+    public String getDescricao() {
+        return descricao;
+
+    }
+
+    public int getDificuldade() {
+        return dificuldade;
+
+    }
+
 }

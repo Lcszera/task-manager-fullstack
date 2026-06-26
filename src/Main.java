@@ -88,8 +88,6 @@ public class Main {
                                     System.out.println("\nFaça login primeiro!");
                                 } else {
 
-                                    tarefaService.listarPorUsuario(usuarioLogado);
-
                                     List<Tarefa> tarefasUsuario = tarefaService.listarPorUsuario(usuarioLogado);
 
                                     boolean encontrouTarefa = false;
@@ -101,16 +99,19 @@ public class Main {
                                             encontrouTarefa = true;
 
                                             System.out.println(
-                                                    "\nTítulo: " + t.getTitulo() +
+                                                    "==================== \n\nTítulo: " + t.getTitulo() +
                                                             "\nID: " + t.getId() +
-                                                            "\nConcluída: " + t.isConcluida()
+                                                            "\nDescrição: " + t.getDescricao() +
+                                                            "\nDificuldade: " + t.getDificuldade() +
+                                                            "\nConcluída: " + t.isConcluida() +
+                                                    "\n\n==================="
                                             );
                                         }
 
-                                        if (!encontrouTarefa) {
-                                            System.out.println("\nNenhuma tarefa encontrada!");
-                                        }
+                                    }
 
+                                    if (!encontrouTarefa) {
+                                        System.out.println("\nNenhuma tarefa encontrada!");
                                     }
 
                                 }
