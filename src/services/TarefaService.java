@@ -69,6 +69,23 @@ public class TarefaService {
             return false;
     }
 
+    public boolean editarTarefa(int id, String titulo, String descricao, int dificuldade) {
+
+        Tarefa tarefa = buscarPorId(id);
+
+        if (tarefa != null) {
+
+            tarefa.setTitulo(titulo);
+            tarefa.setDescricao(descricao);
+            tarefa.setDificuldade(dificuldade);
+
+            return true;
+
+        }
+
+            return false;
+    }
+
     private Tarefa buscarPorId(int id) {
 
         for (Tarefa t : tarefas) {

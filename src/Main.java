@@ -29,7 +29,7 @@ public class Main {
 
             System.out.println("\nPor favor, escolha uma opção do menu: " +
                     "\n1. Cadastrar \n2. Login \n3. Criar tarefa \n4. Minhas tarefas " +
-                    "\n5. Concluir tarefa \n6. Excluir tarefa \n0. Sair");
+                    "\n5. Concluir tarefa \n6. Excluir tarefa \n7. Editar tarefa \n0. Sair");
                 escolha = sc.nextInt();
 
                 switch (escolha) {
@@ -155,65 +155,45 @@ public class Main {
                                 }
 
                         break;
+                    case 7:
+
+                                if (usuarioLogado == null) {
+                                    System.out.println("Faça login primeiro!");
+                                } else {
+
+                                    System.out.println("\nInforme o ID da tarefa que será editada: ");
+                                        id = sc.nextInt();
+
+                                        sc.nextLine();
+
+                                    System.out.println("\nDigite o novo título: ");
+                                        titulo = sc.nextLine();
+
+                                    System.out.println("\nDigite a nova descrição: ");
+                                        descricao = sc.nextLine();
+
+                                    System.out.println("\nDigite a nova dificuldade: ");
+                                        dificuldade = sc.nextInt();
+
+                                if (tarefaService.editarTarefa(id, titulo, descricao, dificuldade)) {
+                                    System.out.println("\nA tarefa com o ID: " + id + " foi editada!");
+                                } else {
+
+                                    System.out.println("\nTarefa não encontrada!");
+                                }
+
+                                }
+
+                        break;
                     case 0:
                         System.out.println("0. Saindo...");
                         break;
+
                     default:
                         System.out.println("\nOpção inválida!");
                 }
         }
 
-        // PARTE CADASTRAL ABAIXO
-
-       /*
-
-        usuarioService.cadastrar("Lucas", "lucasmen2005@gmail.com", "123");
-        Usuario lucas = usuarioService.login("lucasmen2005@gmail.com", "123");
-
-        usuarioService.cadastrar("Rafaella", "rafalouyse@gmail.com", "123");
-        Usuario rafaella = usuarioService.login("rafalouyse@gmail.com", "123");
-
-
-        // TAREFAS ABAIXO
-
-
-        Tarefa tarefasLucas = tarefaService.criar(
-                "Protótipo Web",
-                "Projeto Freelancer",
-                1,
-                lucas
-        );
-
-        Tarefa tarefasRafaella = tarefaService.criar(
-                "Teste Aplicação",
-                "Teste do TaskMannager",
-                0, rafaella
-                );
-
-
-        List<Tarefa> listarLucas = tarefaService.listarPorUsuario(lucas);
-
-        System.out.println(listarLucas.size());
-
-        // UM POUCO DE REDUNDÂNCIA NA PARTE CADASTRAL ABAIXO
-
-
-        usuarioService.cadastrar("Rafaella", "rafalouyse@gmail.com", "rafinha123");
-
-        Usuario logado = usuarioService.login("lucasmen2005@gmail.com", "lucas123");
-
-
-        // CONDIÇÃO PARA CHECAR SE AS CREDENCIAIS DO USUÁRIO ESTÃO CORRETAS, ABAIXO
-
-
-        if (logado != null) {
-            System.out.println("Login realizado: " + logado.getNome());
-        } else {
-            System.out.println("Email ou senha inválidos");
-        }
-
-
-
-         */
+        sc.close();
     }
 }

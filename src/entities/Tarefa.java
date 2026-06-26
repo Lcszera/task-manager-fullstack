@@ -8,11 +8,13 @@ public class Tarefa {
     private int dificuldade;
     private boolean concluida;
     private boolean excluida;
+    private boolean editada;
     private String titulo;
     private String descricao;
     private LocalDate dataCriacao;
     private LocalDate dataConclusao;
     private LocalDate dataExclusao;
+    private LocalDate dataEdicao;
     private Usuario usuario;
 
     public Tarefa(int id, String titulo, String descricao, int dificuldade, Usuario usuario) {
@@ -62,6 +64,12 @@ public class Tarefa {
 
     }
 
+
+    public boolean isEditada() {
+        return editada;
+
+    }
+
     public LocalDate getDataConclusao() {
         return dataExclusao;
 
@@ -72,13 +80,38 @@ public class Tarefa {
 
     }
 
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+
+    }
+
     public String getDescricao() {
         return descricao;
 
     }
 
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+
+    }
+
     public int getDificuldade() {
         return dificuldade;
+
+    }
+
+    public void setDificuldade(int dificuldade) {
+        this.dificuldade = dificuldade;
+
+    }
+
+    public LocalDate getDataEdicao() {
+        return dataEdicao;
+
+    }
+
+    public void setDataEdicao(LocalDate dataEdicao) {
+        this.dataEdicao = dataEdicao;
 
     }
 
