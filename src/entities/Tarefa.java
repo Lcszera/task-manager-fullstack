@@ -144,4 +144,21 @@ public class Tarefa {
 
     }
 
+    public void exibirDetalhes() {
+
+        System.out.println(
+                "==================== \n\nTítulo: " + titulo +
+                        "\nID: " + id +
+                        "\nDescrição: " + descricao +
+                        "\nDificuldade: " + dificuldade +
+                        "\nConcluída: " + isConcluida() +
+                        "\nCriada em: " + dataCriacao +
+                        "\nEditada em: " + dataEdicao +
+                        "\nConcluída em: " + dataConclusao +
+                        "\nExcluída em: " + dataExclusao +
+                        "\n\n==================="
+        );
+
+    }
+
 }
