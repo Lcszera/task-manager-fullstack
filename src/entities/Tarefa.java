@@ -64,14 +64,14 @@ public class Tarefa {
 
     }
 
-
-    public boolean isEditada() {
-        return editada;
+    public void editar() {
+        this.editada = true;
+        this.dataEdicao = LocalDate.now();
 
     }
 
-    public LocalDate getDataConclusao() {
-        return dataExclusao;
+    public boolean isEditada() {
+        return editada;
 
     }
 
@@ -105,6 +105,15 @@ public class Tarefa {
 
     }
 
+    public LocalDate getDataCriacao() {
+        return dataCriacao;
+
+    }
+
+    public void setDataCriacao(LocalDate dataCriacao) {
+        this.dataCriacao = dataCriacao;
+    }
+
     public LocalDate getDataEdicao() {
         return dataEdicao;
 
@@ -112,6 +121,26 @@ public class Tarefa {
 
     public void setDataEdicao(LocalDate dataEdicao) {
         this.dataEdicao = dataEdicao;
+
+    }
+
+    public LocalDate getDataConclusao() {
+        return dataConclusao;
+
+    }
+
+    public void setDataConclusao(LocalDate dataConclusao) {
+        this.dataConclusao = dataConclusao;
+
+    }
+
+    public LocalDate getDataExclusao() {
+        return dataExclusao;
+
+    }
+
+    public void setDataExclusao(LocalDate dataExclusao) {
+        this.dataExclusao = dataExclusao;
 
     }
 

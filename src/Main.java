@@ -104,6 +104,10 @@ public class Main {
                                                             "\nDescrição: " + t.getDescricao() +
                                                             "\nDificuldade: " + t.getDificuldade() +
                                                             "\nConcluída: " + t.isConcluida() +
+                                                            "\nCriada em: " + t.getDataCriacao() +
+                                                            "\nEditada em: " + t.getDataEdicao() +
+                                                            "\nConcluída em: " + t.getDataConclusao() +
+                                                            "\nExcluída em: " + t.getDataExclusao() +
                                                     "\n\n==================="
                                             );
                                         }

@@ -79,6 +79,8 @@ public class TarefaService {
             tarefa.setDescricao(descricao);
             tarefa.setDificuldade(dificuldade);
 
+            tarefa.editar();
+
             return true;
 
         }
