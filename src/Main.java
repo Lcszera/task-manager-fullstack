@@ -16,9 +16,6 @@ public class Main {
         // MENU INTERATIVO ABAIXO
 
         int escolha = -1;
-        String nome;
-        String email;
-        String senha;
         Usuario usuarioLogado = null;
         String titulo;
         String descricao;
@@ -30,174 +27,190 @@ public class Main {
             System.out.println("\nPor favor, escolha uma opção do menu: " +
                     "\n1. Cadastrar \n2. Login \n3. Criar tarefa \n4. Minhas tarefas " +
                     "\n5. Concluir tarefa \n6. Excluir tarefa \n7. Editar tarefa \n0. Sair");
-                escolha = sc.nextInt();
+            escolha = sc.nextInt();
 
-                switch (escolha) {
-                    case 1:
+            switch (escolha) {
+                case 1:
 
-                        System.out.println("\nDigite seu nome: ");
-                            nome = sc.next();
-                        System.out.println("\nDigite seu email: ");
-                            email = sc.next();
-                        System.out.println("\nDigite sua senha: ");
-                            senha = sc.next();
+                    cadastarUsuario(sc, usuarioService);
 
-                                usuarioService.cadastrar(nome, email, senha);
-                                System.out.println("\nCadastro efetuado com sucesso!");
+                    break;
+                case 2:
 
-                        break;
-                    case 2:
+                    usuarioLogado = login(sc, usuarioService);
 
-                        System.out.println("\nDigite seu email: ");
-                            email = sc.next();
-                        System.out.println("\nDigite sua senha: ");
-                            senha = sc.next();
+                    break;
+                case 3:
 
-                                usuarioLogado = usuarioService.login(email, senha);
+                    if (usuarioLogado == null) {
+                        System.out.println("\nFaça login primeiro!");
+                    } else {
+                        System.out.println("\nTítulo: ");
+                            titulo = sc.next();
+                        System.out.println("\nDescrição: ");
+                            descricao = sc.next();
+                        System.out.println("\nDificuldade: ");
+                            dificuldade = sc.nextInt();
 
-                                if (usuarioLogado != null) {
-                                    System.out.println("\nLogin efetuado com sucesso!");
-                                } else {
-                                    System.out.println("\nEmail ou senha inválida!");
-                                }
+                        tarefaService.criar(titulo, descricao, dificuldade, usuarioLogado);
 
+                        System.out.println("\nTarefa criada com sucesso!");
 
-                        break;
-                    case 3:
+                    }
 
-                                if (usuarioLogado == null) {
-                                    System.out.println("\nFaça login primeiro!");
-                                } else {
-                                    System.out.println("\nTítulo: ");
-                                        titulo = sc.next();
-                                    System.out.println("\nDescrição: ");
-                                        descricao = sc.next();
-                                    System.out.println("\nDificuldade: ");
-                                        dificuldade = sc.nextInt();
+                    break;
+                case 4:
 
-                                    tarefaService.criar(titulo, descricao, dificuldade, usuarioLogado);
+                    if (usuarioLogado == null) {
+                        System.out.println("\nFaça login primeiro!");
+                    } else {
 
-                                    System.out.println("\nTarefa criada com sucesso!");
+                        List<Tarefa> tarefasUsuario = tarefaService.listarPorUsuario(usuarioLogado);
 
-                                }
+                        boolean encontrouTarefa = false;
 
-                        break;
-                    case 4:
+                        for (Tarefa t : tarefasUsuario) {
 
-                                if (usuarioLogado == null) {
-                                    System.out.println("\nFaça login primeiro!");
-                                } else {
+                            if (!t.isExcluida()) {
 
-                                    List<Tarefa> tarefasUsuario = tarefaService.listarPorUsuario(usuarioLogado);
+                                encontrouTarefa = true;
 
-                                    boolean encontrouTarefa = false;
+                                System.out.println(
+                                        "==================== \n\nTítulo: " + t.getTitulo() +
+                                                "\nID: " + t.getId() +
+                                                "\nDescrição: " + t.getDescricao() +
+                                                "\nDificuldade: " + t.getDificuldade() +
+                                                "\nConcluída: " + t.isConcluida() +
+                                                "\nCriada em: " + t.getDataCriacao() +
+                                                "\nEditada em: " + t.getDataEdicao() +
+                                                "\nConcluída em: " + t.getDataConclusao() +
+                                                "\nExcluída em: " + t.getDataExclusao() +
+                                                "\n\n==================="
+                                );
+                            }
 
-                                    for (Tarefa t : tarefasUsuario) {
+                        }
 
-                                        if (!t.isExcluida()) {
+                        if (!encontrouTarefa) {
+                            System.out.println("\nNenhuma tarefa encontrada!");
+                        }
 
-                                            encontrouTarefa = true;
+                    }
 
-                                            System.out.println(
-                                                    "==================== \n\nTítulo: " + t.getTitulo() +
-                                                            "\nID: " + t.getId() +
-                                                            "\nDescrição: " + t.getDescricao() +
-                                                            "\nDificuldade: " + t.getDificuldade() +
-                                                            "\nConcluída: " + t.isConcluida() +
-                                                            "\nCriada em: " + t.getDataCriacao() +
-                                                            "\nEditada em: " + t.getDataEdicao() +
-                                                            "\nConcluída em: " + t.getDataConclusao() +
-                                                            "\nExcluída em: " + t.getDataExclusao() +
-                                                    "\n\n==================="
-                                            );
-                                        }
+                    break;
+                case 5:
 
-                                    }
+                    if (usuarioLogado == null) {
+                        System.out.println("Faça login primeiro!");
+                    } else {
 
-                                    if (!encontrouTarefa) {
-                                        System.out.println("\nNenhuma tarefa encontrada!");
-                                    }
+                        System.out.println("\nDigite o ID da tarefa: ");
+                        id = sc.nextInt();
 
-                                }
+                        if (tarefaService.concluirTarefa(id)) {
+                            System.out.println("\nA tarefa com o ID: " + id + " foi concluída!");
+                        } else {
 
-                        break;
-                    case 5:
+                            System.out.println("\nTarefa não encontrada!");
+                        }
 
-                                if (usuarioLogado == null) {
-                                    System.out.println("Faça login primeiro!");
-                                } else {
+                    }
 
-                                    System.out.println("\nDigite o ID da tarefa: ");
-                                        id = sc.nextInt();
+                    break;
+                case 6:
 
-                                if (tarefaService.concluirTarefa(id)) {
-                                    System.out.println("\nA tarefa com o ID: " + id + " foi concluída!");
-                                    } else {
+                    if (usuarioLogado == null) {
+                        System.out.println("Faça login primeiro!");
+                    } else {
 
-                                    System.out.println("\nTarefa não encontrada!");
-                                }
+                        System.out.println("\nDigite o ID da tarefa: ");
+                        id = sc.nextInt();
 
-                                }
+                        if (tarefaService.excluirTarefa(id)) {
+                            System.out.println("\nA tarefa com o ID: " + id + " foi excluída!");
+                        } else {
 
-                        break;
-                    case 6:
+                            System.out.println("\nTarefa não encontrada!");
+                        }
 
-                                if (usuarioLogado == null) {
-                                    System.out.println("Faça login primeiro!");
-                                } else {
+                    }
 
-                                    System.out.println("\nDigite o ID da tarefa: ");
-                                        id = sc.nextInt();
+                    break;
+                case 7:
 
-                                if (tarefaService.excluirTarefa(id)) {
-                                    System.out.println("\nA tarefa com o ID: " + id + " foi excluída!");
-                                } else {
+                    if (usuarioLogado == null) {
+                        System.out.println("Faça login primeiro!");
+                    } else {
 
-                                    System.out.println("\nTarefa não encontrada!");
-                                }
+                        System.out.println("\nInforme o ID da tarefa que será editada: ");
+                        id = sc.nextInt();
 
-                                }
+                        sc.nextLine();
 
-                        break;
-                    case 7:
+                        System.out.println("\nDigite o novo título: ");
+                        titulo = sc.nextLine();
 
-                                if (usuarioLogado == null) {
-                                    System.out.println("Faça login primeiro!");
-                                } else {
+                        System.out.println("\nDigite a nova descrição: ");
+                        descricao = sc.nextLine();
 
-                                    System.out.println("\nInforme o ID da tarefa que será editada: ");
-                                        id = sc.nextInt();
+                        System.out.println("\nDigite a nova dificuldade: ");
+                        dificuldade = sc.nextInt();
 
-                                        sc.nextLine();
+                        if (tarefaService.editarTarefa(id, titulo, descricao, dificuldade)) {
+                            System.out.println("\nA tarefa com o ID: " + id + " foi editada!");
+                        } else {
 
-                                    System.out.println("\nDigite o novo título: ");
-                                        titulo = sc.nextLine();
+                            System.out.println("\nTarefa não encontrada!");
+                        }
 
-                                    System.out.println("\nDigite a nova descrição: ");
-                                        descricao = sc.nextLine();
+                    }
 
-                                    System.out.println("\nDigite a nova dificuldade: ");
-                                        dificuldade = sc.nextInt();
+                    break;
+                case 0:
+                    System.out.println("0. Saindo...");
+                    break;
 
-                                if (tarefaService.editarTarefa(id, titulo, descricao, dificuldade)) {
-                                    System.out.println("\nA tarefa com o ID: " + id + " foi editada!");
-                                } else {
-
-                                    System.out.println("\nTarefa não encontrada!");
-                                }
-
-                                }
-
-                        break;
-                    case 0:
-                        System.out.println("0. Saindo...");
-                        break;
-
-                    default:
-                        System.out.println("\nOpção inválida!");
-                }
+                default:
+                    System.out.println("\nOpção inválida!");
+            }
         }
+
 
         sc.close();
     }
+
+    public static void cadastarUsuario(Scanner sc, UsuarioService usuarioService) {
+
+        System.out.println("\nDigite seu nome: ");
+        String nome = sc.next();
+        System.out.println("\nDigite seu email: ");
+        String email = sc.next();
+        System.out.println("\nDigite sua senha: ");
+        String senha = sc.next();
+
+        usuarioService.cadastrar(nome, email, senha);
+
+        System.out.println("\nCadastro efetuado com sucesso!");
+
+    }
+
+    public static Usuario login(Scanner sc, UsuarioService usuarioService) {
+
+        System.out.println("\nDigite seu email: ");
+        String email = sc.next();
+        System.out.println("\nDigite sua senha: ");
+        String senha = sc.next();
+
+        Usuario usuarioLogado = usuarioService.login(email, senha);
+
+        if (usuarioLogado != null) {
+            System.out.println("\nLogin efetuado com sucesso!");
+        } else {
+            System.out.println("\nEmail ou senha inválida!");
+        }
+
+        return usuarioLogado;
+
+    }
+
 }
